@@ -35,3 +35,8 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Intelli-J IDEA files
+aoauth-lib.iml
+aoauth-lib.ipr
+aoauth-lib.iws
