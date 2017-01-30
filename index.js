@@ -9,14 +9,15 @@ var init = function( config ){
 exports.init = init;
 
 var firebase = function(){
-  var fb = require('firebase');
+  var firebase = require('firebase');
   if( isInitialized ){
-    return Promise.resolve( fb.app( name ) );
+    return Promise.resolve( firebase.app( name ) );
   } else {
     isInitialized = true;
+    console.log( conf );
     var ret = firebase.initializeApp( conf.firebase, name );
     var auth = ret.auth();
-    auth.signInWithEmailAndPassword( conf.aoauth.id, conf.aoauth.secret )
+    return auth.signInWithEmailAndPassword( conf.aoauth.id, conf.aoauth.secret )
       .then( user => {
         console.log( user );
         return Promise.resolve( ret );
@@ -54,7 +55,7 @@ var user = function( uid ){
 exports.user = user;
 
 var userFromToken = function( token ){
-  tokenNamed( token )
+  return tokenNamed( token )
     .then( tokenVal => {
       return user( tokenVal. uid );
     });
